@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shop</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; }
+
+        /* HEADER */
+        header { background: #333; color: #fff; padding: 15px; text-align: center; }
+
+        /* NAVIGATION */
+        nav { background: #444; padding: 10px; display: flex; justify-content: center; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #f39c12; }
+        nav a.active { color: #f39c12; }
+
+        /* HERO SECTION WITH OFFERS */
+        .hero {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h2 {
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        .offer-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .offer-box {
+            background: #f39c12;
+            color: white;
+            width: 220px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform .2s;
+        }
+        .offer-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* CART INFO */
+        .cart-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        /* PRODUCTS */
+        .main-content { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            padding: 20px; 
+        }
+        .product {
+            background: white; 
+            padding: 15px; 
+            margin: 10px; 
+            width: 200px; 
+            border-radius: 5px; 
+            text-align: center; 
+            transition: transform 0.2s;
+        }
+        .product:hover { transform: scale(1.05); }
+
+        .product img { width: 100%; height: 140px; object-fit: cover; border-radius: 5px; }
+
+        /* RATING */
+        .rating { display: flex; justify-content: center; margin: 10px 0; }
+        .star { font-size: 20px; cursor: pointer; color: #ccc; }
+        .star.selected { color: #f39c12; }
+
+        /* MODAL */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .modal-content { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 5px; 
+            text-align: center; 
+        }
+
+        /* FOOTER */
+        footer { background: #333; color: white; text-align: center; padding: 20px; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Simple Shop</h1>
+</header>
+
+<nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="cart.html">Cart</a>
+</nav>
+
+<!-- ⭐ HERO SECTION WITH OFFERS ⭐ -->
+<div class="hero">
+    <h2>🔥 Today's Best Deals</h2>
+
+    <div class="offer-container">
+
+        <div class="offer-box">
+            <h3>50% OFF</h3>
+            <p>On Product 1 — Limited Time!</p>
+        </div>
+
+        <div class="offer-box">
+            <h3>Buy 1 Get 1</h3>
+            <p>Accessories Offer</p>
+        </div>
+
+        <div class="offer-box">
+            <h3>₹200 OFF</h3>
+            <p>New Year Special Deal</p>
+        </div>
+
+        <div class="offer-box">
+            <h3>Flash Sale</h3>
+            <p>Only for 2 Hours!</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="cart-info" onclick="window.location.href='cart.html'">
+    Cart: 0 items
+</div>
+
+<!-- PRODUCTS -->
+<div class="main-content">
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIcBNAg9hw24xyOV7jvPRk4YrO7FG5VOl9sN2L9qm6cgK4pm2BqRaakQ0&s" alt="Product 1">
+        <h3>Product 1</h3>
+        <p>₹29.99</p>
+
+        <div class="rating">
+            <span class="star" onclick="rateProduct(this, 1)">★</span>
+            <span class="star" onclick="rateProduct(this, 2)">★</span>
+            <span class="star" onclick="rateProduct(this, 3)">★</span>
+            <span class="star" onclick="rateProduct(this, 4)">★</span>
+            <span class="star" onclick="rateProduct(this, 5)">★</span>
+        </div>
+
+        <button onclick="addToCart('Product 1', 29.99, 'https://via.placeholder.com/200')">Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRROw7cHFj7c8QW0bSphP9LJuoQNPBeO-N9IPKOLSy-ZJ235kkeF1_yxvQ&s" alt="Product 2">
+        <h3>Product 2</h3>
+        <p>₹49.99</p>
+
+        <div class="rating">
+            <span class="star" onclick="rateProduct(this, 1)">★</span>
+            <span class="star" onclick="rateProduct(this, 2)">★</span>
+            <span class="star" onclick="rateProduct(this, 3)">★</span>
+            <span class="star" onclick="rateProduct(this, 4)">★</span>
+            <span class="star" onclick="rateProduct(this, 5)">★</span>
+        </div>
+
+        <button onclick="addToCart('Product 2', 49.99, 'https://via.placeholder.com/200')">Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu6Af0C3q1GFxiPNSIr6X6qKahoyJygnntH26tDLMyGUPVlbqdny4aDOw&s" alt="Product 3">
+        <h3>Product 3</h3>
+        <p>₹49.99</p>
+
+        <div class="rating">
+            <span class="star" onclick="rateProduct(this, 1)">★</span>
+            <span class="star" onclick="rateProduct(this, 2)">★</span>
+            <span class="star" onclick="rateProduct(this, 3)">★</span>
+            <span class="star" onclick="rateProduct(this, 4)">★</span>
+            <span class="star" onclick="rateProduct(this, 5)">★</span>
+        </div>
+
+        <button onclick="addToCart('Product 3', 49.99, 'https://via.placeholder.com/200')">Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIcBNAg9hw24xyOV7jvPRk4YrO7FG5VOl9sN2L9qm6cgK4pm2BqRaakQ0&s" alt="Product 1">
+        <h3>Product 4</h3>
+        <p>₹29.99</p>
+
+        <div class="rating">
+            <span class="star" onclick="rateProduct(this, 1)">★</span>
+            <span class="star" onclick="rateProduct(this, 2)">★</span>
+            <span class="star" onclick="rateProduct(this, 3)">★</span>
+            <span class="star" onclick="rateProduct(this, 4)">★</span>
+            <span class="star" onclick="rateProduct(this, 5)">★</span>
+        </div>
+
+        <button onclick="addToCart('Product 1', 29.99, 'https://via.placeholder.com/200')">Add to Cart</button>
+    </div>
+
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="cart-modal">
+    <div class="modal-content">
+        <h3>Item Added to Cart!</h3>
+        <button onclick="window.location.href='cart.html'">Go to Cart</button>
+        <button onclick="closeModal()">Continue Shopping</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Simple Shop. All rights reserved.</p>
+</footer>
+
+<script>
+
+    /* CART SYSTEM */
+    if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+    }
+
+    function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        cart.push({ name, price, image });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartDisplay();
+        showModal();
+    }
+
+    function updateCartDisplay() {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        document.querySelector(".cart-info").innerHTML = "Cart: " + cart.length + " items";
+    }
+
+    function showModal() {
+        document.getElementById("cart-modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("cart-modal").style.display = "none";
+    }
+
+    /* RATING SYSTEM */
+    function rateProduct(star, rating) {
+        let stars = star.parentElement.querySelectorAll(".star");
+        stars.forEach((s, index) => {
+            s.classList.toggle("selected", index < rating);
+        });
+        alert("You rated this product " + rating + " stars!");
+    }
+
+    updateCartDisplay();
+
+</script>
+
+</body>
+</html>
